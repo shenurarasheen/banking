@@ -1,5 +1,36 @@
-export default function Home() {
+import HeaderBox from "@/components/HeaderBox";
+import RightSidebar from "@/components/RightSidebar";
+import TotalBalanceBox from "@/components/TotalBalanceBox";
+
+const Home = () => {
+const loggedIn = {firstName: "Shenura", lastName: "Rasheen", email: "rasheen27392@gmail.com"}
+
     return (
-        <h1 className="text-2xl">Home Page</h1>
+        <section className="no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll">
+            <div className="no-scrollbar flex w-full flex-1 flex-col gap-8 px-5 sm:px-8 py-7 lg:py-12 xl:max-h-screen xl:overflow-y-scroll">
+                <header className="flex flex-col justify-between gap-8">
+                    <HeaderBox 
+                        type="greeting"
+                        title="Welcome"
+                        user={loggedIn?.firstName || 'Guest'}
+                        subtext="Access and manage your account and transactions efficiently!"
+                    />
+                    <TotalBalanceBox
+                        accounts={[]}
+                        totalBanks={1}
+                        totalCurrentBalance={1250.35}
+                    />
+                </header>
+                Recent Transactions
+            </div>
+                {/* right side navbar of the home page goes here */}
+                <RightSidebar
+                    user={loggedIn}
+                    transactions={[]}
+                    banks={[{currentBalance: 1250.35}, {currentBalance: 1500.75}]}
+                />
+        </section>
     )
 }
+
+export default Home;
