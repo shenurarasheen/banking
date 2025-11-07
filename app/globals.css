@@ -8,6 +8,10 @@
   font-family: var(--font-ibm-plex-serif);
 }
 
+.font-inter {
+  font-family: var(--font-inter);
+}
+
 /* Hide scrollbar for IE, Edge and Firefox */
 @utility no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
@@ -324,7 +328,7 @@
   }
 
 @utility form-link {
-    @apply text-14 cursor-pointer font-medium;
+    @apply text-14 cursor-pointer font-medium text-[#0179FE];
   }
 
   /* Payment Transfer */

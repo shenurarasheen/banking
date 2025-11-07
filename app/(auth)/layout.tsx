@@ -5,7 +5,6 @@ export default function RootLayout({
 }>) {
   return (
     <main>
-        Side bar for auth
         {children}
     </main>
   );
