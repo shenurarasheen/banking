@@ -22,9 +22,12 @@ import { Input } from "@/components/ui/input"
 import CustomInput from "./CustomInput";
 import { authFormSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { getLoggedInUser, SignIn, SignUp } from "@/lib/actions/user.actions";
 
 const AuthForm = ({ type }: { type: string }) => {
-    const [user, setUser] = useState(null);
+    const router = useRouter();
+    const [user, setUser] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(false);
 
     const formSchema = authFormSchema(type);
@@ -45,10 +48,28 @@ const AuthForm = ({ type }: { type: string }) => {
         },
     })
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    const onSubmit = async (data: z.infer<typeof formSchema>) => {
         setIsLoading(true);
-        console.log(values);
-        setIsLoading(false)
+        try {
+            if (type === 'sign-up') {
+                const newUser = await SignUp(data);
+                console.log(newUser)
+                setUser(data);
+            }
+
+            if (type === 'sign-in') {
+                const res = await SignIn({
+                    email: data.email,
+                    password: data.password
+                });
+
+                if (res) router.push('/');
+            }
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (

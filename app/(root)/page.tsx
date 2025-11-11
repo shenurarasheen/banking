@@ -1,9 +1,10 @@
 import HeaderBox from "@/components/HeaderBox";
 import RightSidebar from "@/components/RightSidebar";
 import TotalBalanceBox from "@/components/TotalBalanceBox";
+import { getLoggedInUser } from "@/lib/actions/user.actions";
 
-const Home = () => {
-const loggedIn = {firstName: "Shenura", lastName: "Rasheen", email: "rasheen27392@gmail.com"}
+const Home = async () => {
+    const loggedIn = await getLoggedInUser();
 
     return (
         <section className="no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll">
@@ -11,8 +12,8 @@ const loggedIn = {firstName: "Shenura", lastName: "Rasheen", email: "rasheen2739
                 <header className="flex flex-col justify-between gap-8">
                     <HeaderBox 
                         type="greeting"
-                        title="Welcome"
-                        user={loggedIn?.firstName || 'Guest'}
+                        title="Welcome,"
+                        user={loggedIn?.name.split(' ')[0] || 'Guest'}
                         subtext="Access and manage your account and transactions efficiently!"
                     />
                     <TotalBalanceBox
